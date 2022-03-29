@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Flip.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container final">
+      <div class="letter F">F</div>
+      <div class="letter l">l</div>
+      <div class="letter i">i</div>
+      <div class="letter p">p</div>
+      <div class="for">for</div>
+      <div class="gsap">GSAP</div>
+    </div>
+    <script>
+      gsap.registerPlugin(Flip);
+
+      const layouts = ['final', 'plain', 'columns', 'grid'];
+      const container = document.querySelector('.container');
+      let curLayout = 0;
+
+      function nextState() {
+        const state = Flip.getState('.letter, .for, .gsap', {
+          props: 'color,backgroundColor',
+          simple: true,
+        });
+
+        container.classList.remove(layouts[curLayout]);
+        curLayout = (curLayout + 1) % layouts.length;
+        container.classList.add(layouts[curLayout]);
+
+        Flip.from(state, {
+          absolute: true,
+          stagger: 0.07,
+          duration: 0.7,
+          ease: 'power2.inOut',
+          spin: curLayout === 0,
+          simple: true,
+          onEnter: (elements, animation) =>
+            gsap.fromTo(
+              elements,
+              { opacity: 0 },
+              { opacity: 1, delay: animation.duration() - 0.1 }
+            ),
+          onLeave: (elements) => gsap.to(elements, { opacity: 0 }),
+        });
+
+        gsap.delayedCall(curLayout === 0 ? 3.5 : 1.5, nextState);
+      }
+      gsap.delayedCall(1, nextState);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/gh/dixonandmoe/rellax@master/rellax.min.js"></script>
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        height: 300vh;
+        color: #fff;
+      }
+
+      body {
+        background: url('./background.png');
+      }
+
+      .content {
+        align-items: center;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        margin: 0;
+        max-width: 100%;
+        width: 100vw;
+      }
+
+      div {
+        background: #333;
+        font-size: 30px;
+        font-weight: bold;
+        height: 200px;
+        line-height: 200px;
+        margin: 1em;
+        text-align: center;
+        width: 300px;
+      }
+
+      .one {
+        background-color: #ec368d;
+      }
+
+      .two {
+        background-color: #333;
+      }
+
+      .three {
+        background-color: #440381;
+      }
+
+      .image {
+        z-index: -1;
+        position: absolute;
+        bottom: 20px;
+        left: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="content">
+      <div class="one rellax" data-rellax-speed="4">Faster</div>
+      <div class="two">No parallax</div>
+      <div class="three rellax" data-rellax-speed="-8">Slower</div>
+      <img class="image rellax" data-rellax-speed="10" src="./gallaxy.png" />
+    </article>
+    <script>
+      new Rellax('.rellax');
+    </script>
+  </body>
+</html>
